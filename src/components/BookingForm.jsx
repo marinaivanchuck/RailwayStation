@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 import { saveBooking } from '../services/BookingService';
 import styles from './BookingForm.module.css';
 
-export default function BookingForm({ train, wagon, selectedSeats, 
-onSuccess }) {
+export default function BookingForm({ train, wagon, selectedSeats, onSuccess }) {
   const [form, setForm] = useState({ name: '', phone: '', email: '' });
   const [errors, setErrors] = useState({});
 
@@ -12,11 +11,9 @@ onSuccess }) {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = "Ім'я обов'язкове";
     if (!form.phone.trim()) newErrors.phone = "Телефон обов'язковий";
-    else if (!/^\+?\d{10,13}$/.test(form.phone.replace(/\s/g,''))) 
-newErrors.phone = "Невірний формат телефону";
+    else if (!/^\+?\d{10,13}$/.test(form.phone.replace(/\s/g, ''))) newErrors.phone = "Невірний формат телефону";
     if (!form.email.trim()) newErrors.email = "Email обов'язковий";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Невірний 
-email";
+    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Невірний email";
     return newErrors;
   };
 
@@ -43,14 +40,12 @@ email";
         type="tel" placeholder="Телефон" value={form.phone}
         onChange={(e) => setForm({...form, phone: e.target.value})}
       />
-      {errors.phone && <span 
-className={styles.error}>{errors.phone}</span>}
+      {errors.phone && <span className={styles.error}>{errors.phone}</span>}
       <input
         type="email" placeholder="Email" value={form.email}
         onChange={(e) => setForm({...form, email: e.target.value})}
       />
-      {errors.email && <span 
-className={styles.error}>{errors.email}</span>}
+      {errors.email && <span className={styles.error}>{errors.email}</span>}
       <button type="submit" disabled={selectedSeats.length === 0}>
         Забронювати ({selectedSeats.length} місць)
       </button>
